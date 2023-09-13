@@ -6,7 +6,7 @@
 
 # cau lenh voi nestjs
 
-- su dung `nest g co|mo|s <name>` de tao tu dong controller, module, services
+- su dung `nest g mo | co |s <name>` de tao tu dong controller, module, services
 - bo sung 1 so script nhu sau:
 
 ```javascript
@@ -16,7 +16,7 @@
     "migration:revert":"npm run typeorm -- migration:revert"
 ```
 
-- tao migrantion voi cau lenh
+- sau khi update/tao `entity` co the run migrantion voi cau lenh
 
 ```javascript
 yarn run migration:generate db/migrations/create_user_table
@@ -24,3 +24,11 @@ yarn run migration:generate db/migrations/create_user_table
 
 - sau khi tao xong migration:generate thi co the su dung `migration:run` de tao ra table; & co the share migration voi dev# de tao table
 - neu su dung `yarn run migration:revert` typeorm se huy migrantion vua moi thuc hien gan nhat
+
+# ve file .dto.ts
+
+- dinh nghia kieu du lieu ma client post len server
+
+# cac pakage cai them
+
+- su dung `bcrypt` de ma hoa password cai dat `npm i bcrypt`
