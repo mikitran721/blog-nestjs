@@ -32,3 +32,16 @@ yarn run migration:generate db/migrations/create_user_table
 # cac pakage cai them
 
 - su dung `bcrypt` de ma hoa password cai dat `npm i bcrypt`
+- su dung JWT tao access&refresh-token `npm i @nestjs/jwt`
+- su dung `class-validator` de validate `yarn add class-validator` (can define o dto.ts & khai bao sd o controller)
+- cai dong thoi `class-transformer` de su dung validate
+
+# noi dung
+
+- xay dung api dang ky nguoi dung
+- api login & refresh-token
+-
+
+# time hoc
+
+`17:32` clip 3
