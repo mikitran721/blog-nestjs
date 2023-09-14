@@ -46,6 +46,7 @@
 - Improve get list user: pagination; Search, Filter.
 - cong cu Swagger API: su dung tuong tu postman tren browser
 - upload file voi Multer, upload len folder 'publics', luu vao DB, validate
+- Relationship 1-n; Create API with Post
 
 # CRUD API:
 
