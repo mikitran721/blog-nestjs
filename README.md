@@ -36,6 +36,7 @@ yarn run migration:generate db/migrations/create_user_table
 - su dung `class-validator` de validate `yarn add class-validator` (can define o dto.ts & khai bao sd o controller)
 - cai dong thoi `class-transformer` de su dung validate
 - cai dat `yarn add @nestjs/config`
+- cai swagger `yarn add @nestjs/swagger`
 
 # noi dung
 
@@ -44,6 +45,7 @@ yarn run migration:generate db/migrations/create_user_table
   - khi access-token het han se kiem tra refresh-token de tao ra 1 access-token & refresh-token moi.
 - Build: auth Guards
 - Improve get list user: pagination; Search, Filter.
+- cong cu Swagger API
 
 # CRUD API:
 
