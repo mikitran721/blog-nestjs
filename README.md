@@ -42,6 +42,12 @@ yarn run migration:generate db/migrations/create_user_table
 - xay dung api dang ky nguoi dung
 - api login & refresh-token co validate = class-validator & su dung `config` .env
   - khi access-token het han se kiem tra refresh-token de tao ra 1 access-token & refresh-token moi.
+- Build: auth Guards
+
+# CRUD API:
+
+- de sd entity can import vao module
+- chua xu ly khi update ma them 1 fields du lieu khong thuoc table
 
 # time hoc
 

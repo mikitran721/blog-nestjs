@@ -1,4 +1,38 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './entities/user.entity';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { CreateUserDto } from './dto/create-user.dto';
+import * as bcrypt from 'bcrypt'
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
-export class UserService {}
+export class UserService {
+    constructor(@InjectRepository(User)private userRepository:Repository<User>){}
+    
+    async findAll():Promise<User[]>{
+        return await this.userRepository.find({
+            select:['id','firstName','lastName','email','status','created_at','updated_at']
+        })
+    }
+
+    async findOne(id:number):Promise<User>{
+        return await this.userRepository.findOneBy({id})
+    }
+
+    async create(createUserDto:CreateUserDto):Promise<User>{
+        const saltRound = 10;
+        const salt = await bcrypt.genSalt(saltRound)
+        const hashPassword = await bcrypt.hash(createUserDto.password,salt);
+        // console.log(hashPassword)
+        return await this.userRepository.save({...createUserDto, password:hashPassword})
+    }
+
+    async update(id:number, updateUserDto:UpdateUserDto):Promise<UpdateResult>{
+        return await this.userRepository.update(id,updateUserDto)
+    }
+
+    async delete(id:number):Promise<DeleteResult>{
+        return await this.userRepository.delete(id)
+    }
+}
