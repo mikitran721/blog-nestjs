@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { FilterUserDto } from './dto/filter-user.dto';
 
 @Controller('users')
 export class UserController {
@@ -11,8 +12,10 @@ export class UserController {
 
     @UseGuards(AuthGuard)
     @Get()
-    findAll():Promise<User[]>{
-        return this.userService.findAll()
+    findAll(@Query() query:FilterUserDto):Promise<User[]>{
+        // nhan tham so page & item-per-page de pagination
+        console.log(">>> check query for pagination ",query)
+        return this.userService.findAll(query)
     }
 
     @UseGuards(AuthGuard)
@@ -32,7 +35,6 @@ export class UserController {
     @UseGuards(AuthGuard)
     @Put(':id')
     update(@Param('id') id:string, @Body() updateUserDto:UpdateUserDto){
-        console.log(">>check update: ",updateUserDto)
         return this.userService.update(Number(id),updateUserDto)
     }
 

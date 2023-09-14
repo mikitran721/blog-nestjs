@@ -43,6 +43,7 @@ yarn run migration:generate db/migrations/create_user_table
 - api login & refresh-token co validate = class-validator & su dung `config` .env
   - khi access-token het han se kiem tra refresh-token de tao ra 1 access-token & refresh-token moi.
 - Build: auth Guards
+- Improve get list user: pagination; Search, Filter.
 
 # CRUD API:
 
