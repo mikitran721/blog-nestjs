@@ -5,13 +5,15 @@ import { User } from 'src/user/entities/user.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt'
 import { LoginUserDto } from './dto/login-user.dto';
- import { JwtService } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config/dist';
 
 @Injectable()
 export class AuthService {
     constructor(
         @InjectRepository(User) private userRepository:Repository<User>,
-        private jwtService:JwtService
+        private jwtService:JwtService,
+        private configService:ConfigService
     ){}
     // thuc hien logic
 
@@ -40,12 +42,31 @@ export class AuthService {
 
     }
 
+    async refreshToken(refresh_token:string):Promise<any>{
+        try{
+            const verify = await this.jwtService.verifyAsync(refresh_token,{
+                secret:this.configService.get<string>('SECRET_REFRESH_TOKEN')
+            })
+            // console.log(">> check veryfy: ",verify)
+            // check trong DB
+            const checkExistToken = await this.userRepository.findOneBy({email:verify.email,refresh_token})
+
+            if(checkExistToken){
+                return this.generateToken({id:verify.id, email:verify.email})
+            }else{
+                throw new HttpException("Refresh token is not valid",HttpStatus.BAD_REQUEST)
+            }
+        }catch(err){
+            throw new HttpException("Refresh token is not valid",HttpStatus.BAD_REQUEST)
+        }
+    }
+
     // generate token
     private async generateToken(payload:{id:number, email:string}){
         const access_token = await this.jwtService.signAsync(payload);
         const refresh_token = await this.jwtService.signAsync(payload,{
-            secret:'abc123',
-            expiresIn:'1d'
+            secret:this.configService.get<string>('SECRET_REFRESH_TOKEN'),
+            expiresIn:this.configService.get<string>('EXP_REFRESH_TOKEN')
         })
         await this.userRepository.update(
             {email:payload.email},

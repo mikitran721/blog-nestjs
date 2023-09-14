@@ -35,12 +35,13 @@ yarn run migration:generate db/migrations/create_user_table
 - su dung JWT tao access&refresh-token `npm i @nestjs/jwt`
 - su dung `class-validator` de validate `yarn add class-validator` (can define o dto.ts & khai bao sd o controller)
 - cai dong thoi `class-transformer` de su dung validate
+- cai dat `yarn add @nestjs/config`
 
 # noi dung
 
 - xay dung api dang ky nguoi dung
-- api login & refresh-token
--
+- api login & refresh-token co validate = class-validator & su dung `config` .env
+  - khi access-token het han se kiem tra refresh-token de tao ra 1 access-token & refresh-token moi.
 
 # time hoc
 
