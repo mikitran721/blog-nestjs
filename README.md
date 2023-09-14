@@ -16,11 +16,8 @@
     "migration:revert":"npm run typeorm -- migration:revert"
 ```
 
-- sau khi update/tao `entity` co the run migrantion voi cau lenh
-
-```javascript
-yarn run migration:generate db/migrations/create_user_table
-```
+- sau khi update/tao `entity` co the run migrantion voi cau lenh:
+  `yarn run migration:generate db/migrations/create_user_table`
 
 - sau khi tao xong migration:generate thi co the su dung `migration:run` de tao ra table; & co the share migration voi dev# de tao table
 - neu su dung `yarn run migration:revert` typeorm se huy migrantion vua moi thuc hien gan nhat
@@ -36,7 +33,9 @@ yarn run migration:generate db/migrations/create_user_table
 - su dung `class-validator` de validate `yarn add class-validator` (can define o dto.ts & khai bao sd o controller)
 - cai dong thoi `class-transformer` de su dung validate
 - cai dat `yarn add @nestjs/config`
-- cai swagger `yarn add @nestjs/swagger`
+- cai swagger `yarn add @nestjs/swagger` - api document
+- cai Multer `yarn add --dev @types/multer`
+- cai dat `yarn add path` ho tro lay extension tu file
 
 # noi dung
 
@@ -45,12 +44,15 @@ yarn run migration:generate db/migrations/create_user_table
   - khi access-token het han se kiem tra refresh-token de tao ra 1 access-token & refresh-token moi.
 - Build: auth Guards
 - Improve get list user: pagination; Search, Filter.
-- cong cu Swagger API
+- cong cu Swagger API: su dung tuong tu postman tren browser
+- upload file voi Multer, upload len folder 'publics', luu vao DB, validate
 
 # CRUD API:
 
 - de sd entity can import vao module
 - chua xu ly khi update ma them 1 fields du lieu khong thuoc table
+- Feature `UseInterceptors` cua NestJs de: cho phep can thiep vao luong xu ly truoc khi vao controller - thuc hien cac tac vu `xac thuc, ghi log, xu ly file`
+  - sd folder `helper\config.ts` de luu tru cau hinh file upload
 
 # time hoc
 

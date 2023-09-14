@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
 import { AuthGuard } from 'src/auth/auth.guard';
@@ -6,6 +6,9 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FilterUserDto } from './dto/filter-user.dto';
 import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { storageConfig } from 'helpers/config';
+import { extname } from 'path';
 
 @ApiBearerAuth() //dinh nghia Bearer-auth cho swagger
 @ApiTags("Users")
@@ -50,5 +53,39 @@ export class UserController {
     @Delete(':id')
     delete(@Param('id') id:string){
         return this.userService.delete(Number(id))
+    }
+
+    //upload avatar
+    @Post('upload-avatar')
+    @UseGuards(AuthGuard)
+    @UseInterceptors(FileInterceptor('avatar',
+    {storage:storageConfig('avatar'),
+    fileFilter:(req,file,cb) =>{
+        const ext = extname(file.originalname);
+        //dinh nghia cac duoi file
+        const allowExtArr = ['.jpg','.png','.jpeg']
+        if(!allowExtArr.includes(ext)){
+            req.fileValidationError = `wrong extension type. Accepted file ext are: ${allowExtArr.toString()}`;
+            cb(null,false);
+        }else{
+            const fileSize = parseInt(req.headers['content-length']);
+            if(fileSize > (1024 * 1024 *5)){
+                req.fileValidationError = 'File size is too large. Accepted file size is less then 5MB';
+                cb(null,false)
+            }else{
+                cb(null,true); //vuot qua thu thach
+            }
+        }
+    }
+})) //dang ky dung Interceptors; ten field & cau hinh
+    uploadAvatar(@Req() req:any, @UploadedFile() file:Express.Multer.File){
+        // lay thong tin user tu token `req.user_data`
+        if(req.fileValidationError){
+            throw new BadRequestException(req.fileValidationError)
+        }
+        if(!file){
+            throw new BadRequestException('File is required')
+        }
+        this.userService.updateAvatar(req.user_data.id,file.destination + '/' + file.filename)
     }
 }
