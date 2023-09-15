@@ -19,8 +19,8 @@ async function bootstrap() {
   // duong dan api swagger
   SwaggerModule.setup('api', app, document);
   // bat `enableCors` de react call api
-  app.enableCors()
+  app.enableCors();
 
-  await app.listen(5001);
+  await app.listen(5000);
 }
 bootstrap();

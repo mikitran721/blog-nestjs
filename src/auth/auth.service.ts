@@ -8,6 +8,7 @@ import { LoginUserDto } from './dto/login-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config/dist';
 
+
 @Injectable()
 export class AuthService {
     constructor(
@@ -27,6 +28,10 @@ export class AuthService {
         const user = await this.userRepository.findOne({
             where:{email:loginUserDto.email}
         })
+
+        //delay time phan hoi
+        await new Promise(resolve => setTimeout(resolve,2000));
+
         if(!user){
             throw new HttpException("Email is not exist",HttpStatus.UNAUTHORIZED)
         }
