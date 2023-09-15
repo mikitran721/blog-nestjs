@@ -1,4 +1,5 @@
 import { type } from "os";
+import { Category } from "src/category/entities/category.entity";
 import { User } from "src/user/entities/user.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -28,4 +29,7 @@ export class Post{
     // dinh nghia relationship
     @ManyToOne(()=> User, (user) => user.posts)
     user:User
+
+    @ManyToOne(()=> Category, (category) => category.posts)
+    category:Category
 }

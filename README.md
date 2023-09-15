@@ -47,7 +47,8 @@
 - cong cu Swagger API: su dung tuong tu postman tren browser
 - upload file voi Multer, upload len folder 'publics', luu vao DB, validate
 - Relationship 1-n; Create API with Post
-- Get post data
+- Get post data; Update, delete API with Post; validate
+- Category module cho post, filter post by category, list all category api
 
 # CRUD API:
 
