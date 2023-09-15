@@ -7,18 +7,20 @@ async function bootstrap() {
 
   // config su dung swagger
   const config = new DocumentBuilder()
-  .setTitle("Blog APIs")
-  .setDescription("List APIs for simple Blog by Miki-Tran")
-  .setVersion("1.0")
-  .addTag("Auth")
-  .addTag("Users")
-  .addBearerAuth()
-  .build();
+    .setTitle('Blog APIs')
+    .setDescription('List APIs for simple Blog by Miki-Tran')
+    .setVersion('1.0')
+    .addTag('Auth')
+    .addTag('Users')
+    .addBearerAuth()
+    .build();
 
-  const document = SwaggerModule.createDocument(app,config);
+  const document = SwaggerModule.createDocument(app, config);
   // duong dan api swagger
-  SwaggerModule.setup('api',app, document);
+  SwaggerModule.setup('api', app, document);
+  // bat `enableCors` de react call api
+  app.enableCors()
 
-  await app.listen(3000);
+  await app.listen(5001);
 }
 bootstrap();
