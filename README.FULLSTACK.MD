@@ -9,4 +9,10 @@
 await new Promise((resolve) => setTimeout(resolve, 2000));
 ```
 
-# luong refresh tu dong
+# delete multiple blogs
+
+- su dung `ParseArrayPipe` de convert string-id `vd: 1,3,5`
+
+# time
+
+`3:57`
