@@ -13,6 +13,11 @@ await new Promise((resolve) => setTimeout(resolve, 2000));
 
 - su dung `ParseArrayPipe` de convert string-id `vd: 1,3,5`
 
+# noi dung update
+
+- the api getProfile, can config `staticfile` de frontend co the view avatar o `main.ts`;
+- update - bo `upload` trong path of avatar khi luu vao db
+
 # time
 
 `3:57`

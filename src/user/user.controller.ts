@@ -28,6 +28,14 @@ export class UserController {
         return this.userService.findAll(query)
     }
 
+    // api get profile
+    @UseGuards(AuthGuard)
+    @Get('/profile')
+    profile(@Req() req:any):Promise<User>{
+        // console.log(">> get profile: ",req.user_data.id)
+        return this.userService.findOne(Number(req.user_data.id))
+    }
+
     @UseGuards(AuthGuard)
     @Get(':id')
     findOne(@Param('id') id:string):Promise<User>{
@@ -94,6 +102,6 @@ export class UserController {
         if(!file){
             throw new BadRequestException('File is required')
         }
-        this.userService.updateAvatar(req.user_data.id,file.destination + '/' + file.filename)
+        this.userService.updateAvatar(req.user_data.id,file.fieldname + '/' + file.filename)
     }
 }
