@@ -19,3 +19,4 @@ await new Promise((resolve) => setTimeout(resolve, 2000));
 - update - bo `upload` trong path of avatar khi luu vao db
 - update lai path khi upload `thumbnail` post
 - bo sung field `summary` trong post
+- thay doi kieu 'longtext' cho description-post

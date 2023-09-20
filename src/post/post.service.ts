@@ -26,6 +26,7 @@ export class PostService {
 
       return await this.postRepository.findOneBy({ id: res.id });
     } catch (error) {
+      console.log(">> Loi khong the tao post: ",error)
       throw new HttpException('Can not create post', HttpStatus.BAD_REQUEST);
     }
   }
