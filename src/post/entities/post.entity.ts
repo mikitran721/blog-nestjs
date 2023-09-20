@@ -10,7 +10,10 @@ export class Post{
 
     @Column()
     title:string;
-
+    
+    @Column()
+    summary:string;
+    
     @Column()
     description:string;
 

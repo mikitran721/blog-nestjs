@@ -102,6 +102,6 @@ export class UserController {
         if(!file){
             throw new BadRequestException('File is required')
         }
-        this.userService.updateAvatar(req.user_data.id,file.fieldname + '/' + file.filename)
+        this.userService.updateAvatar(req.user_data.id,'avatar/' + file.filename)
     }
 }

@@ -18,3 +18,4 @@ await new Promise((resolve) => setTimeout(resolve, 2000));
 - the api getProfile, can config `staticfile` de frontend co the view avatar o `main.ts`;
 - update - bo `upload` trong path of avatar khi luu vao db
 - update lai path khi upload `thumbnail` post
+- bo sung field `summary` trong post
