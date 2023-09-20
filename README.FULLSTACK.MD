@@ -20,3 +20,4 @@ await new Promise((resolve) => setTimeout(resolve, 2000));
 - update lai path khi upload `thumbnail` post
 - bo sung field `summary` trong post
 - thay doi kieu 'longtext' cho description-post
+- bo sung api upload image-CKEditor

@@ -15,6 +15,7 @@ export class PostController {
     constructor(private postService:PostService){}
 
     @UseGuards(AuthGuard)
+    @UsePipes(ValidationPipe)
     @Post()
     @UseInterceptors(FileInterceptor('thumbnail',{
         storage:storageConfig('post'),
@@ -36,7 +37,7 @@ export class PostController {
         }
     }
     }))
-    @UsePipes(ValidationPipe)   
+    
     create(@Req() req:any,@Body() createPostDto:CreatePostDto, @UploadedFile() file:Express.Multer.File){
         // can dinh nghia dto.ts cho phan create
 
@@ -108,5 +109,36 @@ export class PostController {
     delete(@Param('id') id:string){
         // goi service delete
         return this.postService.delete(Number(id))
+    }
+
+    // api for CKEditor - upload images
+    @Post('cke-upload')
+    @UseInterceptors(FileInterceptor('upload',{
+        storage:storageConfig('ckeditor'),
+        fileFilter:(req,file,cb) =>{
+        const ext = extname(file.originalname);
+        //dinh nghia cac duoi file
+        const allowExtArr = ['.jpg','.png','.jpeg']
+        if(!allowExtArr.includes(ext)){
+            req.fileValidationError = `wrong extension type. Accepted file ext are: ${allowExtArr.toString()}`;
+            cb(null,false);
+        }else{
+            const fileSize = parseInt(req.headers['content-length']);
+            if(fileSize > (1024 * 1024 *5)){
+                req.fileValidationError = 'File size is too large. Accepted file size is less then 5MB';
+                cb(null,false)
+            }else{
+                cb(null,true); //vuot qua thu thach
+            }
+        }
+    }
+    }))
+    
+    ckeUpload(@Body() data:any, @UploadedFile() file:Express.Multer.File){
+        // can dinh nghia dto.ts cho phan create
+        console.log(">>data from CKE")
+        return{
+            url:`ckeditor/${file.filename}`
+        }
     }
 }
