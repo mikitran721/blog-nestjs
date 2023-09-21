@@ -21,3 +21,5 @@ await new Promise((resolve) => setTimeout(resolve, 2000));
 - bo sung field `summary` trong post
 - thay doi kieu 'longtext' cho description-post
 - bo sung api upload image-CKEditor
+- Quan ly user `Role Based access control` cho admin va user thuong.
+- Can config tai `app.module.ts` de dung global cho `Auth.Guard` vs `RoleGuard`; de public Auth/Role thi `@SetMetadata('isPublic',true)` hoac `@SetMetadata('roles',['Admin'])` de set role cho 'admin'; dinh nghia lai `role.decorator` giam text khi set role.

@@ -1,0 +1,4 @@
+// viet set public.guard ngan gon hon
+import { SetMetadata } from "@nestjs/common";
+
+export const Public = () => SetMetadata('isPublic',true)
